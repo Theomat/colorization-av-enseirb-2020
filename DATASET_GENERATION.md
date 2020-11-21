@@ -27,7 +27,7 @@ And then you need ```npm``` for ```bato```.
 - **One Piece**:
   - Chapter 1 (51 images): ```python dataset-builder/imagedl.py --start-img 2 -o "one_piece" "bato:1451139" "bato:774999"```
   - Chapter 1-931 (47 481 images):```python dataset-builder/imagedl.py --shift -2 -o "one_piece" --min 1 --max 931 "read:8.readonepiece:one-piece" "read:8.readonepiece:one-piece-digital-colored-comics"```
-- **Hunter x Hunter**: (Untested)
+- **Hunter x Hunter**:
   - Chapter 1-69  (1 242 images):```python dataset-builder/imagedl.py -o "hunter_x_hunter" --min 1 --max 69 "read:2.readhxh:hunter-x-hunter" "read:2.readhxh:hunter-x-hunter-colored"```
   - Chapter 339-360  (396 images):```python dataset-builder/imagedl.py -o "hunter_x_hunter" --min 339 --max 360 "read:2.readhxh:hunter-x-hunter" "read:2.readhxh:hunter-x-hunter-colored"```
 
