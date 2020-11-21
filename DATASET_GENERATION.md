@@ -11,7 +11,7 @@ python dataset-builder/imagedl.py _h
 ## Sources supported
 
 - ```bato```: https://bato.to/chapter/1262257
-- ```readsnk```: https://ww7.readsnk.com/chapter/shingeki-no-kyojin-chapter-001/
+- ```read```: https://ww7.readsnk.com/chapter/shingeki-no-kyojin-chapter-001/ and all associated sites
 
 ## Dependencies
 
