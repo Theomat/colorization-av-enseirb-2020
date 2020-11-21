@@ -1,0 +1,5 @@
+numpy
+requests
+tqdm
+pillow
+js2py
