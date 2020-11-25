@@ -136,13 +136,14 @@ def get_chapter_images(name: str, chapter: int, verbose: bool = False) -> Tuple[
         return False, []
 
 
-def download_images(bw_images_urls: List[str], color_image_urls: List[str], path: str) -> int:
+def download_images(bw_images_urls: List[str], color_image_urls: List[str], c_path: str, bw_path: str) -> int:
     index: int = 0
     images: int = 0
     for i in tqdm.trange(len(bw_urls), desc="images"):
         bw, color = bw_urls[i], colored_urls[i]
-        path_bw: str = f"{path}_{index}_bw.png"
-        path_colored: str = f"{path}_{index}_color.png"
+
+        path_bw: str = f"{bw_path}_{index}.png"
+        path_colored: str = f"{c_path}_{index}.png"
         if download_image(bw, path_bw) and download_image(color, path_colored):
             images += 1
         else:
@@ -173,6 +174,11 @@ for chapter in tqdm.trange(parameters.chapter_min, parameters.chapter_max + 1, d
         if not os.path.exists("./dataset"):
             os.mkdir("./dataset")
         os.mkdir(folder)
+        bw_folder: str = os.path.join(folder, "bw")
+        colored_folder: str = os.path.join(folder, "colored")
+        os.mkdir(bw_folder)
+        os.mkdir(colored_folder)
+
 
     if parameters.shift > 0:
         bw_urls: List[str] = bw_urls[parameters.shift:]
@@ -191,6 +197,6 @@ for chapter in tqdm.trange(parameters.chapter_min, parameters.chapter_max + 1, d
     bw_urls: List[str] = bw_urls[start_index:]
     colored_urls: List[str] = colored_urls[start_index:]
     # Download the images
-    images: int = download_images(bw_urls, colored_urls, os.path.join(folder, f"chapter_{chapter}"))
+    images: int = download_images(bw_urls, colored_urls, os.path.join(folder, 'colored', f"chapter_{chapter}"), os.path.join(folder, 'bw', f"chapter_{chapter}"))
     total_images += images
 print(f"Saved a total of {total_images} images !")
