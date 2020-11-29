@@ -14,9 +14,10 @@ import random
 
 import torchvision.models as models
 
+from skimage import color
 
 class MangaDataset(Dataset):
-    def __init__(self, main_dir, transform):
+    def __init__(self, main_dir, transform=None):
         
         self.bw_dir = os.path.join(main_dir, 'bw')
         self.color_dir = os.path.join(main_dir, 'colored')
@@ -37,40 +38,18 @@ class MangaDataset(Dataset):
 
     def __getitem__(self, idx):
         
-        seed = np.random.randint(2147483647) # make a seed with numpy generator 
-                
         target_img = os.path.join(self.color_dir, self.total_colored_imgs[idx])
-        input_img = os.path.join(self.bw_dir, self.total_bw_imgs[idx])
-
-        target = Image.open(target_img).convert("RGB").resize((1024,1024))
-
-        random.seed(seed) # apply this seed to img tranfsorms
-        torch.manual_seed(seed) # needed for torchvision 0.7
-        tensor_target = self.transform(target)
-
-
-        # ATTENTION: we can either use target_img or input_img
-        # target_img will generate BW input from colored image
-        # input_img will use actual original manga data
-        ipt = Image.open(target_img).convert("L").resize((1024,1024))
+        out_np = np.asarray(Image.open(target_img).resize((256,256), resample=3))
         
-        random.seed(seed) # apply this seed to target tranfsorms
-        torch.manual_seed(seed) # needed for torchvision 0.7
-        tensor_input = self.transform(ipt)
+        img_lab_orig = color.rgb2lab(out_np)
         
+        ipt = img_lab_orig[:, :, 0]
+        out = img_lab_orig[:, :, 1:]
+        
+        out = np.stack((out[:, :, 0], out[:, :, 1]))
+        
+        # [256, 256, 2] -> [2, 256, 256]
+        tensor_input = torch.Tensor(ipt).unsqueeze(0)
+        tensor_target = torch.Tensor(out)
                 
         return tensor_input, tensor_target
-
-data_transform = transforms.Compose([
-        transforms.RandomResizedCrop(224),
-        transforms.RandomHorizontalFlip(),
-        transforms.ToTensor(),
-        #transforms.Normalize(mean=[0.485, 0.456, 0.406],
-        #                     std=[0.229, 0.224, 0.225])
-])
-
-manga_dataset = MangaDataset('./dataset/one_piece', transform=data_transform)
-
-dataset_loader = torch.utils.data.DataLoader(manga_dataset,
-                                             batch_size=4, shuffle=True,
-                                             num_workers=4)
