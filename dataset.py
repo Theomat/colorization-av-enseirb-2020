@@ -17,21 +17,26 @@ import torchvision.models as models
 from skimage import color
 
 class MangaDataset(Dataset):
-    def __init__(self, main_dir, transform=None):
+    def __init__(self, main_dir, train=True, transform=None):
         
-        self.bw_dir = os.path.join(main_dir, 'bw')
-        self.color_dir = os.path.join(main_dir, 'colored')
-        
+
+        if train:
+            # self.bw_dir = os.path.join(main_dir, 'bw', 'train')
+            self.color_dir = os.path.join(main_dir, 'colored', 'train')
+        else:
+            # self.bw_dir = os.path.join(main_dir, 'bw', 'test')
+            self.color_dir = os.path.join(main_dir, 'colored', 'test')
+
         
         self.transform = transform
         
         colored_imgs = os.listdir(self.color_dir)
-        bw_imgs = os.listdir(self.bw_dir)
+        # bw_imgs = os.listdir(self.bw_dir)
         
         self.total_colored_imgs = natsort.natsorted(colored_imgs)
-        self.total_bw_imgs = natsort.natsorted(bw_imgs)
+        #self.total_bw_imgs = natsort.natsorted(bw_imgs)
         
-        assert len(self.total_colored_imgs) == len(self.total_bw_imgs)
+        #assert len(self.total_colored_imgs) == len(self.total_bw_imgs)
 
     def __len__(self):
         return len(self.total_colored_imgs)
