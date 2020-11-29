@@ -39,7 +39,7 @@ class MangaDataset(Dataset):
     def __getitem__(self, idx):
         
         target_img = os.path.join(self.color_dir, self.total_colored_imgs[idx])
-        out_np = np.asarray(Image.open(target_img).resize((256,256), resample=3))
+        out_np = np.asarray(Image.open(target_img).resize((512,512), resample=3))
         
         img_lab_orig = color.rgb2lab(out_np)
         
