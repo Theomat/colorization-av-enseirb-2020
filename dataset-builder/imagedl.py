@@ -170,15 +170,16 @@ for chapter in tqdm.trange(parameters.chapter_min, parameters.chapter_max + 1, d
     if not success:
         continue
     # Create folder
+    bw_folder: str = os.path.join(folder, "bw")
+    colored_folder: str = os.path.join(folder, "colored")
     if not os.path.exists(folder):
         if not os.path.exists("./dataset"):
             os.mkdir("./dataset")
         os.mkdir(folder)
-        bw_folder: str = os.path.join(folder, "bw")
-        colored_folder: str = os.path.join(folder, "colored")
+    if not os.path.exists(bw_folder):
         os.mkdir(bw_folder)
+    if not os.path.exists(colored_folder):
         os.mkdir(colored_folder)
-
 
     if parameters.shift > 0:
         bw_urls: List[str] = bw_urls[parameters.shift:]
