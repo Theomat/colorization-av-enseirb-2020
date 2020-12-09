@@ -30,7 +30,7 @@ def read_get_url(name: str, chapter: int, alternative: bool = False):
         chapter: str = "{}".format(chapter)
     else:
         chapter: str = "{:3d}".format(chapter)
-    return READ_BASE_URL.format(url_complement, name=name, chapter=chapter)
+    return READ_BASE_URL.format(url_complement, name=name, chapter=str(chapter).zfill(3))
 
 
 def read_get_links(name: str, chapter: int, r) -> List[str]:
