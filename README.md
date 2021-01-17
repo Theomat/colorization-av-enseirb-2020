@@ -1,5 +1,15 @@
 # Artificial Vision: Colorization of Manga
 
+## File organisation
+
+- the ```CUT``` folder contains a clone of the original CUT repository with the files (models) tailored to our needs.
+- the ```CycleGAN``` folder contains a clone of the original CycleGAN repository with the files (models) tailored to our needs.
+- the ```dataset-builder``` folder contains a script to download the images and another script to scale down the images (see ```DATASET_GENERATION.md``` for more information).
+- the ```upsampling.ipynb``` is the notebook we sued to produce our upsampling results using LapSRN and EDSR deep sampling models.
+- the ```test_*.sh``` are srcipts to colorize your images (see the section **Running new classifications**).
+- the ```metrics.sh``` is a script that produce the three metrics used in the article PSNR, SSIM, channel histogram difference.
+
+
 
 ### Authors
 
