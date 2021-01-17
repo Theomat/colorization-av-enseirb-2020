@@ -2,6 +2,7 @@
 
 ## File organisation
 
+- Our article is the file named ```article.pdf```.
 - the ```CUT``` folder contains a clone of the original CUT repository with the files (models) tailored to our needs.
 - the ```CycleGAN``` folder contains a clone of the original CycleGAN repository with the files (models) tailored to our needs.
 - the ```dataset-builder``` folder contains a script to download the images and another script to scale down the images (see ```DATASET_GENERATION.md``` for more information).
@@ -11,7 +12,7 @@
 
 
 
-### Authors
+## Authors
 
 With equals contributions:
   - Otavio Flores Jacobi
@@ -19,7 +20,7 @@ With equals contributions:
   - Théo Matricon
   - Julien Mazué
 
-### Running new classifications
+## Running new classifications
 
  - We know pushing heavy models to github is not the optimal way of sharing CNN weights. However, due to us not wanting to pay for a better storage system, we use it anyway :). In order to reduce the space consumed by the model, we push only the CUT Generator networks weights, which can be found on folders `CUT/checkpoints/one_piece_256` and `CUT/checkpoints/one_piece_512`.
 
