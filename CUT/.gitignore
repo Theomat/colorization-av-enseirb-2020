@@ -5,7 +5,9 @@ node_modules/
 .DS_Store
 debug*
 datasets/
-checkpoints/
+checkpoints/*
+!checkpoints/one_piece_256/
+!checkpoints/one_piece_512/
 results/
 build/
 dist/
